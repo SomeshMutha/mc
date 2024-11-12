@@ -1,0 +1,81 @@
+/Generation of PWM signal for DC motor
+control Using PIC 18F4550
+
+#include<p18f4550.h>
+
+void myMsDelay
+(unsigned int time);
+
+void main()
+
+{
+
+    TRISCbits.TRISC0 = 0 ;            
+ // DC Motor IN1
+
+    TRISCbits.TRISC6 = 0 ;            
+    // DC Motor IN2
+
+    TRISCbits.TRISC7 = 0 ;            
+    // CCP2 PWM output, DC motor enable
+
+    PR2 = 0x4A;          //10khz  
+            // set PWM period to Maximum
+value
+
+   
+
+    T2CON = 0x07;
+
+    PORTCbits.RC7 = 0;
+
+    PORTCbits.RC6 = 1;
+
+  while(1)
+
+    {
+
+CCP1CON = 0x2C;
+
+   CCPR1L = 0x12;          //25% Duty Cycle
+           
+
+   myMsDelay(1000);
+
+   CCP1CON = 0x0C;              
+      // Configure CCP1CON as explained above.
+
+   CCPR1L = 0x25;    //50% Duty Cycle
+
+   myMsDelay(1000);
+
+   CCP1CON = 0x2C;              
+      // Configure CCP1CON as explained above.
+
+   CCPR1L = 0x37;   //75% Duty Cycle
+
+   myMsDelay(1000);
+
+     }  
+
+ 
+
+}
+
+
+
+void myMsDelay
+(unsigned int time)
+
+{
+
+    unsigned int i, j;
+
+    for (i = 0; i <
+time; i++)
+
+        for (j = 0; j < 710; j++);/*Calibrated
+for a 1 ms
+delay in MPLAB*/
+
+}

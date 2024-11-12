@@ -1,0 +1,32 @@
+#include<reg51.h>
+#define SegOne 0x02
+#define SegTwo 0x01
+void Delay_ms (unsigned int ms_count)
+{
+	unsigned int i,j;
+	for (i=0;i<ms_count;i++)
+	{
+		for (j=0;j<100;j++);
+	}}
+
+int main()
+{
+	char Seg_code[]={0xc0,0xf9,0xf4,0xa4,0xb0,0x99,0x92,0xf8,0x80,0x90};
+	int cnt,num,temp,i;
+	while(1)
+	{
+		for (cnt=0x00;cnt<=99;cnt++)
+		{
+			for (i=0;i<100;i++)
+			{
+				num=cnt;
+				temp=num % 10;
+				P2=SegOne;
+				P1=Seg_code[temp];
+				Delay_ms(10);
+				
+				temp=num / 10;
+				P2=SegTwo;
+				P1=Seg_code[temp];
+				Delay_ms(10);
+			} } } } 

@@ -1,0 +1,24 @@
+//led flashing
+#include<reg51.h>
+void Delay (void);
+void main (void)
+{
+while(1)
+{
+	P1=0x00;
+	Delay();
+	P1=0xFF;
+	Delay();
+}
+}
+void Delay (void)
+{
+	int i;
+	int j;
+	for (i=0;i<10;i++)
+	{
+		for (j=0;j<10000;j++)
+		{
+		}
+	}
+}

@@ -1,0 +1,32 @@
+// Program for Triangular waveform
+
+#include<reg51.h>
+
+void delay();
+
+void main() {
+    unsigned char i;
+    while(1) {
+        // Rising edge
+        for(i=0; i<256; i++) {
+            P1 = i;
+            delay();
+        }
+        
+        // Falling edge
+        for(i=255; i>=0; i--) {
+            P1 = i;
+            delay();
+        }
+    }
+}
+
+void delay() {
+    TMOD = 0x10;  // Mode 1 (16-bit timer mode)
+    TL1 = 0x1A;   // Timer low byte
+    TH1 = 0xFF;   // Timer high byte
+    TR1 = 1;      // Start timer
+    while(TF1 == 0);  // Wait for timer overflow
+    TR1 = 0;      // Stop timer
+    TF1 = 0;      // Clear overflow flag
+}
